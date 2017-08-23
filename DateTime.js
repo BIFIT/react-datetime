@@ -359,8 +359,12 @@ var Datetime = createClass({
 		});
 	},
 
-	handleClickOutside: function() {
-		if ( this.props.input && this.state.open && !this.props.open ) {
+	handleClickOutside: function(event) {
+		if (
+			this.props.input
+			&& this.input !== event.target
+			&& this.state.open
+			&& !this.props.open ) {
 			this.setState({ open: false }, function() {
 				this.props.onBlur( this.state.selectedDate || this.state.inputValue );
 			});
@@ -401,6 +405,8 @@ var Datetime = createClass({
 		return props;
 	},
 
+	input: null,
+
 	render: function() {
 		// TODO: Make a function or clean up this code,
 		// logic right now is really hard to follow
@@ -412,6 +418,7 @@ var Datetime = createClass({
 		if ( this.props.input ) {
 			children = [ React.createElement('input', assign({
 				key: 'i',
+				ref: input => {this.input = input},
 				type: 'text',
 				className: 'form-control',
 				onFocus: this.openCalendar,

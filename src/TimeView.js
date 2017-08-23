@@ -220,8 +220,8 @@ var DateTimePickerTime = onClickOutside( createClass({
 		return str;
 	},
 
-	handleClickOutside: function() {
-		this.props.handleClickOutside();
+	handleClickOutside: function(event) {
+		this.props.handleClickOutside(event);
 	}
 }));
 
